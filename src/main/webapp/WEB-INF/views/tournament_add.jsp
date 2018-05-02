@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 <script>
 	$(document).ready(
 			function() {
-				var date_input = $('input[name="date"]'); //our date input has the name "date"
+				var date_input = $('input[id="date_row"]'); //our date input has the name "date"
 				var container = $('.bootstrap-iso form').length > 0 ? $(
 						'.bootstrap-iso form').parent() : "body";
 				date_input.datepicker({
@@ -45,26 +46,31 @@
 
 	<div class="container">
 		<div class="row">
-			<form class="col-md-8 col-md-offset-2" method="post">
+		<spring:url value="/tournament/create" var="createUrl"/>
+			<form:form action="${createUrl}" method="POST" modelAttribute="tournament">
 				<div class="form-group">
-					<label for="name_row">Név</label> <input type="text"
-						id="name_row" class="form-control" name="name" />
+					<label for="name_row">Név</label>
+					<form:input path="name" cssClass="form-control" id="name_row"/>
+				<!-- Old html form
+				  	<input type="text" id="name_row" class="form-control" name="name" />
+				-->
 				</div>
 
 				<div class="form-group ">
 					<label class="control-label " for="date_row">Dátum</label>
-					<input class="form-control" id="date_row" name="date" placeholder="MM/DD/YYYY" type="text" />
+					<form:input path="date" cssClass="form-control" name="date" id="date_row" type="text" placeholder="MM/DD/YYYY"/>
 				</div>
 
 				<div class="form-group">
 					<label for="description_row">Leírás</label>
-					<textarea class="form-control" rows="3" name="description" id="description_row"></textarea>
+				
+					<form:textarea path="description" cssClass="form-control" rows="3"  id="description_row"/>
 				</div>
 
 				<button type="submit" class="btn btn-default">Létrehozás</button>
 
-			</form>
-
+			
+</form:form>
 		</div>
 	</div>
 </body>

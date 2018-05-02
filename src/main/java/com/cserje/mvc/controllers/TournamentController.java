@@ -34,24 +34,25 @@ public class TournamentController {
 	}
 	
 	@RequestMapping(value="/addTournament", method=RequestMethod.GET)
-	public String addTournament() {
+	public String addTournament(Model model) {
 		System.out.println("GET");
+		model.addAttribute("tournament",new Tournament());
 		return "tournament_add";
 	}
-	@RequestMapping(value="/addTournament", method=RequestMethod.POST)
+	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveTournament(@ModelAttribute Tournament tournament) {
 		System.out.println("POST");
 		System.out.println(tournament);
-		return "tournament_add";
+		return "tournaments";
 	}
-	
+
 	@RequestMapping("/currentTournamentTemplate")
 	public String goHome(Model model) {
 		Tournament tournament = new Tournament();
 		tournament.setName("Kiválasztott torna adatai");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		tournament.setDate("17/07/2018");
-		tournament.setDescription("Hello Bébi");
+		tournament.setDescription("Hello ");
 		model.addAttribute("currentTournament",tournament);
 		return "current_tournament_template";
 	}

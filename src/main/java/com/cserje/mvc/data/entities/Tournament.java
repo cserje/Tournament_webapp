@@ -1,6 +1,5 @@
 package com.cserje.mvc.data.entities;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
