@@ -30,7 +30,7 @@
 		<table id="example" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 			<tr>
-					<th>Név</th><th>Dátum</th><th>Leírás</th>
+					<th>Név</th><th>Dátum</th><th>Leírás</th><th>Műveletek</th>
 				</tr>
 			</thead>
 
@@ -41,6 +41,10 @@
 					    
 						<td><a href="<spring:url value="/tournament/${tournament.tournamentId}"/>">${tournament.name}</a></td>
 						<td>${tournament.date}</td><td>${tournament.description}</td>
+						<td>
+						<button onclick="window.location.href='<spring:url value="/tournament/delete/${tournament.tournamentId}"/>'" type="button" class="btn" style="background:#dd2c00; color:white;">Törlés</button>
+					
+						<button type="button" class="btn" style="background:#ff6600; color:white;">Módosítás</button></td>
 					</tr>	
 				</c:forEach>
 			</tbody>

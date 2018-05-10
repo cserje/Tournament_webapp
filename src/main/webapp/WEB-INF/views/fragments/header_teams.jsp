@@ -26,6 +26,17 @@
           			</ul>
           			
         		</li>
+        		<li class="dropdown">
+        		<a href="#" class="dropdown-toggle" 
+          				data-toggle="dropdown" role="button" 
+          				aria-expanded="false">Csapatok<span class="caret"></span></a>
+          	
+          			<ul class="dropdown-menu" role="menu">
+            			<li><a href="<spring:url value="/tournament/addTournament"/>" >Új létrehozása</a></li>
+            			<li><a href="<spring:url value="/tournament/find"/>" >Listája</a></li>
+          			</ul>
+          			
+        		</li>
         		
     		<!--  	
     		<li class="dropdown">

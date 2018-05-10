@@ -14,15 +14,15 @@
 </head>
 <body>
 	
-	<jsp:include page="../views/fragments/header.jsp"></jsp:include>			
+	<jsp:include page="../views/fragments/header_teams.jsp"></jsp:include>			
 
 	<div class="container">
 <div class="container">
 <h2>Tornák</h2>
 <ul class="container">
-<li class="list-group-item"><label>Név:</label><br><span>${currentTournament.name}</span></li>
-<li class="list-group-item"><label>Dátum:</label><br><span>${currentTournament.date}</span></li>
-<li class="list-group-item"><label>Leírás:</label><br><span>${currentTournament.description}</span></li>
+<li class="list-group-item"><label>Név: &nbsp</label><span>${currentTournament.name}</span></li>
+<li class="list-group-item"><label>Dátum: &nbsp</label><span>${currentTournament.date}</span></li>
+<li class="list-group-item"><label>Leírás: &nbsp</label><span>${currentTournament.description}</span></li>
 </ul>
 </div>
 	</div>

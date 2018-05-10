@@ -20,7 +20,7 @@ public class TournamentController {
 	@Autowired
 	private TournamentService tournamentService; 
 	
-	@RequestMapping("/find")
+	@RequestMapping(value="/find")
 	public String find(Model model)
 	{
 		model.addAttribute("tournaments", this.tournamentService.findAll());
@@ -33,27 +33,27 @@ public class TournamentController {
 		return "current_tournament_template";
 	}
 	
+	@RequestMapping(value="/delete/{projectId}")
+	public String deleteTournament(Model model, @PathVariable Long projectId) {
+		tournamentService.delete(tournamentService.find(projectId));
+		model.addAttribute("tournaments", this.tournamentService.findAll());
+		return "tournaments";
+	}
+	
 	@RequestMapping(value="/addTournament", method=RequestMethod.GET)
 	public String addTournament() {
 		System.out.println("GET");
 		return "tournament_add";
 	}
 	@RequestMapping(value="/addTournament", method=RequestMethod.POST)
-	public String saveTournament(@ModelAttribute Tournament tournament) {
+	public String saveTournament(@ModelAttribute Tournament tournament, Model model) {
 		System.out.println("POST");
 		System.out.println(tournament);
-		return "tournament_add";
+		tournamentService.persist(tournament);
+		model.addAttribute("tournaments", this.tournamentService.findAll());
+		return "tournaments";
 	}
 	
-	@RequestMapping("/currentTournamentTemplate")
-	public String goHome(Model model) {
-		Tournament tournament = new Tournament();
-		tournament.setName("Kiválasztott torna adatai");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		tournament.setDate("17/07/2018");
-		tournament.setDescription("Hello Bébi");
-		model.addAttribute("currentTournament",tournament);
-		return "current_tournament_template";
-	}
+	
 
 }

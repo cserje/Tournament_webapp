@@ -4,29 +4,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.cserje.mvc.data.entities.Tournament;
 
+@Service
 public class TournamentService {
 
 	private long id=0L;
 	private List<Tournament> tournaments = new LinkedList<Tournament>();
 
 	public TournamentService() {
-		tournaments.add(createTournament("Tavaszi torna", "2018/04/22", "Munkacsarnok"));
-		tournaments.add(createTournament("24 órás torna", "2018/06/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Őszi torna", "2018/09/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Tavaszi torna", "2018/04/22", "Munkacsarnok"));
-		tournaments.add(createTournament("24 órás torna", "2018/06/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Őszi torna", "2018/09/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Tavaszi torna", "2018/04/22", "Munkacsarnok"));
-		tournaments.add(createTournament("24 órás torna", "2018/06/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Őszi torna", "2018/09/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Tavaszi torna", "2018/04/22", "Munkacsarnok"));
-		tournaments.add(createTournament("24 órás torna", "2018/06/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Őszi torna", "2018/09/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Tavaszi torna", "2018/04/22", "Munkacsarnok"));
-		tournaments.add(createTournament("24 órás torna", "2018/06/22", "Munkacsarnok"));
-		tournaments.add(createTournament("Őszi torna", "2018/09/22", "Munkacsarnok"));
+		tournaments.add(createTournament("Init", "2018/04/22", "Munkacsarnok"));
+
 	}
 
 	private Tournament createTournament(String name, String date, String description) {
@@ -37,6 +27,16 @@ public class TournamentService {
 		tournament.setDate(date);
 		tournament.setDescription(description);
 		return tournament;
+	}
+	
+	public void persist(Tournament tournament) {
+		tournament.setTournamentId(id);
+		id++;
+		tournaments.add(tournament);
+	}
+	
+	public void delete(Tournament tournament) {
+		tournaments.remove(tournament);
 	}
 
 	public List<Tournament> findAll() {
