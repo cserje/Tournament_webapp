@@ -1,9 +1,7 @@
 package com.cserje.mvc.data.entities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Tournament {
 
@@ -11,6 +9,8 @@ public class Tournament {
 	private String name;
 	private String date;
 	private String description;
+	private List<Team> teams = new LinkedList<Team>();
+	
 	public String getName() {
 		return name;
 	}
@@ -39,6 +39,12 @@ public class Tournament {
 	public String toString() {
 		return "Tournament [tournamentId=" + tournamentId + ", name=" + name + ", date=" + date + ", description="
 				+ description + "]";
+	}
+	public List<Team> getTeams() {
+		return teams;
+	}
+	public void addTeam(Team team) {
+		teams.add(team);
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.cserje.mvc.data.entities.Team;
 import com.cserje.mvc.data.entities.Tournament;
 
 @Service
@@ -17,15 +18,19 @@ public class TournamentService {
 	public TournamentService() {
 		tournaments.add(createTournament("Init", "2018/04/22", "Munkacsarnok"));
 
+
 	}
 
 	private Tournament createTournament(String name, String date, String description) {
 		Tournament tournament = new Tournament();
 		tournament.setTournamentId(id);
-		id++;
+		
 		tournament.setName(name);
 		tournament.setDate(date);
 		tournament.setDescription(description);
+		tournament.addTeam(new Team((Long)id,1L,"CarpeDM","Cserje"));
+		tournament.addTeam(new Team((Long)id,2L,"LSLParaszt","Pajor"));
+		id++;
 		return tournament;
 	}
 	
