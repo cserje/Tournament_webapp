@@ -16,17 +16,16 @@ public class TournamentService {
 	private List<Tournament> tournaments = new LinkedList<Tournament>();
 
 	public TournamentService() {
-		tournaments.add(createTournament("Init", "2018/04/22", "Munkacsarnok"));
+		tournaments.add(createTournament("Init", "Munkacsarnok"));
 
 
 	}
 
-	private Tournament createTournament(String name, String date, String description) {
+	private Tournament createTournament(String name, String description) {
 		Tournament tournament = new Tournament();
 		tournament.setTournamentId(id);
 		
 		tournament.setName(name);
-		tournament.setDate(date);
 		tournament.setDescription(description);
 		tournament.addTeam(new Team((Long)id,1L,"CarpeDM","Cserje"));
 		tournament.addTeam(new Team((Long)id,2L,"LSLParaszt","Pajor"));
@@ -35,12 +34,28 @@ public class TournamentService {
 	}
 	
 	public void persist(Tournament tournament) {
-		tournament.setTournamentId(id);
-		id++;
-		tournaments.add(tournament);
+		
+			tournament.setTournamentId(id);
+			id++;
+			tournaments.add(tournament);
+		
+	}
+	
+	public void update(Long id, Tournament tournament) {
+	for(int i=0;i<tournaments.size();++i)
+	{
+		if(tournaments.get(i).getTournamentId()==id)
+		{
+			tournaments.get(i).setName(tournament.getName());
+			tournaments.get(i).setDate(tournament.getDate());
+			tournaments.get(i).setDescription(tournament.getDescription());
+		}
+	}
 	}
 	
 	public void delete(Tournament tournament) {
+		System.out.println(tournament.getTournamentId()+" id record deleted");
+		
 		tournaments.remove(tournament);
 	}
 

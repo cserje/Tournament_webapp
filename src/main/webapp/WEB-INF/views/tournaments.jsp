@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@ button {margin:5px;}
 		<table id="example" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 			<tr>
-					<th>Név</th><th>Dátum</th><th>Leírás</th><th>Műveletek</th>
+					<th>Id</th><th>Név</th><th>Dátum</th><th>Leírás</th><th>Műveletek</th>
 				</tr>
 			</thead>
 
@@ -41,13 +42,15 @@ button {margin:5px;}
 				
 				<c:forEach items="${tournaments}" var="tournament">
 					<tr>
-					    
+					    <td>${tournament.tournamentId}</td>
 						<td><a href="<spring:url value="/tournament/${tournament.tournamentId}"/>">${tournament.name}</a></td>
-						<td>${tournament.date}</td><td>${tournament.description}</td>
+						<td><fmt:formatDate pattern="dd/MM/yyyy" value="${tournament.date}" />
+						</td>
+						<td>${tournament.description}</td>
 						<td>
 						<button onclick="window.location.href='<spring:url value="/tournament/delete/${tournament.tournamentId}"/>'" type="button" class="btn" style="background:#dd2c00; color:white;">Törlés</button>
 					
-						<button type="button" class="btn" style="background:#ff6600; color:white;">Módosítás</button></td>
+						<button type="button" class="btn" style="background:#ff6600; color:white;" onclick="window.location.href='<spring:url value="/tournament/${tournament.tournamentId}/modifyTournament"/>'">Módosítás</button></td>
 					</tr>	
 				</c:forEach>
 			</tbody>

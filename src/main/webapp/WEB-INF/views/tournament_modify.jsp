@@ -54,7 +54,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form class="col-md-8 col-md-offset-2" method="post" action='<spring:url value="/tournament/addTournament"/>' >
+			<form class="col-md-8 col-md-offset-2" method="post" >
 				<div class="form-group">
 					<label for="name_row">Név</label> <input type="text"
 						id="name_row" class="form-control" name="name" value="${tournament.name}" />
@@ -65,13 +65,10 @@
 					<textarea class="form-control" rows="3" name="description" id="description_row" >${tournament.description}</textarea>
 				</div>
 
-			<!--  	<div class="form-group ">
-					<label class="control-label " for="date_row">Dátum</label>
-					<input class="form-control" id="date_row" name="date"  type="text" value="${tournament.date}"/>
-				</div>-->
+				
 				<div class="form-group ">
 				<label for="date">Dátum</label>
-				<input class="form-control" id="date" name="date" format="dd:MM:yyyy" value="${tournament.dateString}"/>
+				<input class="form-control" id="date" name="date" value="${tournament.dateString}"/>
 				</div>
 
 

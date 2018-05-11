@@ -33,6 +33,7 @@ public class TournamentController {
 		model.addAttribute("tournaments", this.tournamentService.findAll());
 		return "redirect:/tournament/find";
 	}
+
 	
 	//Create a new tournament
 	@RequestMapping(value="/addTournament", method=RequestMethod.GET)
@@ -45,6 +46,10 @@ public class TournamentController {
 	public String saveTournament(@ModelAttribute Tournament tournament, Model model) {
 		System.out.println("POST");
 		System.out.println(tournament);
+		if(tempTournament!=null) {
+			//tournamentService.find(tempTournament.getTournamentId()).modifyDetails(tournament);
+			tournamentService.delete(tempTournament);
+			tempTournament=null;}
 		tournamentService.persist(tournament);
 		model.addAttribute("tournaments", this.tournamentService.findAll());
 		return "redirect:/tournament/find";
@@ -67,5 +72,23 @@ public class TournamentController {
 		System.out.println(team.getName()+" "+team.getLeader());
 		return "redirect:/tournament/"+projectId;
 	}
-
+	private Tournament tempTournament=null;
+	
+    @RequestMapping(value="/{projectId}/modifyTournament",method=RequestMethod.GET)
+	public String modifyTournament(@PathVariable Long projectId, Model model) {
+		model.addAttribute("tournament",tournamentService.find(projectId));
+		tempTournament=tournamentService.find(projectId);
+		//When we click on modify button, the record will be deleted immediately and then save the record again
+		//tournamentService.delete(tournamentService.find(projectId));
+    	return "tournament_modify";
+	}
+	//Save the new tournament
+	@RequestMapping(value="/{projectId}/modifyTournament", method=RequestMethod.POST)
+	public String savemodifiedTournament(@PathVariable Long projectId, @ModelAttribute Tournament tournament, Model model) {
+		System.out.println("Módosítás controllermsad.");
+		tournamentService.update(projectId,tournament);
+		//tournamentService.find(projectId).update(tournament);
+		model.addAttribute("tournaments", this.tournamentService.findAll());
+		return "redirect:/tournament/find";
+	}
 }
